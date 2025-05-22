@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cuenta Regresiva</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #1c1c1c;
+      color: #f0f0f0;
+      text-align: center;
+      padding-top: 100px;
+    }
+
+    h1 {
+      font-size: 4.5rem;
+      margin-bottom: 40px;
+      color: #ffffff;
+      //text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff;
+    }
+
+    #countdown {
+      font-size: 4rem;
+      margin-top: 20px;
+      padding: 30px;
+      border: 5px solid #2263b9;
+      border-radius: 20px;
+      display: inline-block;
+      background: rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 20px #2263b9, 0 0 40px #2263b9;
+      transition: all 0.3s ease-in-out;
+    }
+
+    #countdown:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 30px #ffffff, 0 0 60px #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="title"></h1>
+  <div id="countdown"></div>
+
+  <script>
+    // === CONFIGURA AQUÍ ===
+    const countdownTitle = "Depósito de PTU";
+    const targetDate = new Date("2025-05-22T15:26:59"); // Formato ISO: YYYY-MM-DDTHH:MM:SS
+    // =======================
+
+    document.getElementById("title").innerText = countdownTitle;
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerText = "¡Es el momento!";
+        clearInterval(timer);
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("countdown").innerText =
+        `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+  </script>
+
+</body>
+</html>
